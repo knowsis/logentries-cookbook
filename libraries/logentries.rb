@@ -9,7 +9,7 @@ module Knowsis
            
             def get_hosts()
                 Chef::Log.debug("Fetching logs for hosts")
-                uri = "https://pull.logentries.com/#{ node[:knowsis][:log_entries][:user_key] }/hosts/"
+                uri = "https://pull.logentries.com/#{ node[:logentries][:user_key] }/hosts/"
                 response = JSON.parse(open(uri).read)
                 hosts = response["list"].select {|item| item["object"] == "host"}
                 hosts
@@ -18,7 +18,7 @@ module Knowsis
             def create_host(hostname)
                 params = {
                     "request" => "register",
-                    "user_key" => node[:knowsis][:log_entries][:user_key],
+                    "user_key" => node[:logentries][:user_key],
                     "name" => hostname,
                     "hostname" => hostname        
                 }
@@ -40,7 +40,7 @@ module Knowsis
             def get_logs(host_key)
 
                 Chef::Log.debug("Fetching logs for host: #{host_key}")
-                uri = "https://pull.logentries.com/#{ node[:knowsis][:log_entries][:user_key] }/hosts/#{host_key}/"
+                uri = "https://pull.logentries.com/#{ node[:logentries][:user_key] }/hosts/#{host_key}/"
                 
                 response = JSON.parse(open(uri).read)
                 hosts = response["list"].select {|item| item["object"] == "log"}
@@ -69,7 +69,7 @@ module Knowsis
             def create_log(logname, host_key)                
                 params = {
                     "request" => "new_log",
-                    "user_key" => node[:knowsis][:log_entries][:user_key],
+                    "user_key" => node[:logentries][:user_key],
                     "host_key" => host_key,
                     "name" => logname,
                     "retrntion" => -1,
