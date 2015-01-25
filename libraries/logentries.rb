@@ -61,7 +61,7 @@ module Knowsis
                     lof = log["log"]
                 end
 
-                log["key"]
+                log["token"]
                
             end
 
