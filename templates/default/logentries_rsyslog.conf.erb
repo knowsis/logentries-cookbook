@@ -1,0 +1,6 @@
+
+
+
+
+$template Logentries,"<%= log_key %> %HOSTNAME% %syslogtag%%msg%\n"
+*.* @@api.logentries.com:10000;Logentries
