@@ -1,4 +1,4 @@
-Chef::Resource::Template.send(:include, Knowsis::Logging:LogEntries)
+Chef::Resource::Template.send(:include, Knowsis::Logging::LogEntries)
 
 include_recipe "rsyslog"
 
