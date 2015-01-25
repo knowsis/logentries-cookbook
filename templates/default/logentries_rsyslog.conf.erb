@@ -2,5 +2,5 @@
 
 
 
-$template Logentries,"<%= log_key %> %HOSTNAME% %syslogtag%%msg%\n"
+$template Logentries,"<%= get_log_key(node[:logentries][:log_name], node[:logentries][:host_name]) %> %HOSTNAME% %syslogtag%%msg%\n"
 *.* @@api.logentries.com:10000;Logentries
