@@ -11,8 +11,10 @@ template "/etc/rsyslog.d/10-nlogentries.conf" do
     source "logentries_rsyslog.conf.erb"
     owner "root"
     mode "644"
-    variables ({
-      "log_key" => get_log_key(node[:opsworks][:instance][:hostname], node[:opsworks][:stack][:name])
-    })
+    variables ( 
+        lazy{
+            {"log_key" => get_log_key(node[:opsworks][:instance][:hostname], node[:opsworks][:stack][:name])}            
+        }
+    )
     notifies :restart, 'service[rsyslog]', :delayed
 end
