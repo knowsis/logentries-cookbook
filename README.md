@@ -25,15 +25,17 @@ node[:logentries][:host_name]           -   The name of the host
 
 node[:logentries][:log_name]            -   The name of the log
 
-node[:logentries]['cert_file']          -   Where to store cert bundle. Defaults to '/opt/ssl/logentries.all.crt'
+node[:logentries][:cert_file]           -   Where to store cert bundle. Defaults to '/opt/ssl/logentries.all.crt'
 
-node[:logentries]['resume_retry_count'] -   Number of times to retry sending failed messages. Defaults to unlimited.
+node[:logentries][:resume_retry_count]  -   Number of times to retry sending failed messages. Defaults to unlimited.
 
-node[:logentries]['queue_disk_space']   -   Maximum disk space for queues. Defaults to 100M.
+node[:logentries][:queue_disk_space]    -   Maximum disk space for queues. Defaults to 100M.
 
-node[:logentries]['queue_size']         -   Maximum events to queue. Defaults to 100000.
+node[:logentries][:queue_size]          -   Maximum events to queue. Defaults to 100000.
 
-node[:logentries]['queue_file_name']    -   Name of the disk queue. Defaults to 'rsyslog_queue_main'.]
+node[:logentries][:queue_file_name]     -   Name of the disk queue. Defaults to 'rsyslog_queue_main'.
+
+node[:logentries][:syslog_selector]     -   The selector to filter which logs are sent to LogEntries. Defaults to *.*
 
 ```
 
