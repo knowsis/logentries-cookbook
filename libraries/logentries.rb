@@ -8,7 +8,7 @@ module Knowsis
         module LogEntries
            
             def get_hosts()
-                Chef::Log.debug("Fetching logs for hosts")
+                Chef::Log.info("Fetching logs for hosts")
                 uri = "https://pull.logentries.com/#{ node[:logentries][:user_key] }/hosts/"
                 response = JSON.parse(open(uri).read)
                 hosts = response["list"].select {|item| item["object"] == "host"}
@@ -39,7 +39,7 @@ module Knowsis
 
             def get_logs(host_key)
 
-                Chef::Log.debug("Fetching logs for host: #{host_key}")
+                Chef::Log.info("Fetching logs for host: #{host_key}")
                 uri = "https://pull.logentries.com/#{ node[:logentries][:user_key] }/hosts/#{host_key}/"
                 
                 response = JSON.parse(open(uri).read)
@@ -49,19 +49,22 @@ module Knowsis
 
             def get_log_key(logname, host_name)
 
-                Chef::Log.debug("Getting log key for log: #{logname} under host #{ host_name}")
+                Chef::Log.info("Getting log key for log: #{logname} under host #{ host_name}")
 
                 host_key = get_host_key(host_name)
                 
                 log = get_logs(host_key).find { |log| log["name"] == logname}
                 
                 if log.nil? || log.empty?
-                    Chef::Log.debug("Log with name: #{logname} does not exist. Creating new log under host: #{ host_key}")
+                    Chef::Log.info("Log with name: #{logname} does not exist. Creating new log under host: #{ host_key}")
                     log = create_log(logname, host_key)
                     lof = log["log"]
                 end
 
-                log["token"]
+                token = log["token"]
+
+                Chef::Log.info("Log token: #{token}")
+                token
                
             end
 
@@ -92,10 +95,10 @@ module Knowsis
 
 
             def get_host_key(hostname)
-                Chef::Log.debug("Finding host with name: #{ hostname} ")
+                Chef::Log.info("Finding host with name: #{ hostname} ")
                 host = get_hosts.find { |host| host["name"] == hostname}
                 if host.nil? || host.empty?
-                    Chef::Log.debug("Host with name: #{hostname} does not exist. Creating new host")
+                    Chef::Log.info("Host with name: #{hostname} does not exist. Creating new host")
                     host = create_host(hostname)
                     host = host["host"]
                 end
