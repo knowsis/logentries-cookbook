@@ -16,8 +16,7 @@ default[:logentries][:queue_size] = 100000
 default[:logentries][:queue_file_name] = 'rsyslog_queue_main'
 
 # Where to store ssl cert file.
-default[:logentries][:ssl_cert_location] = "/opt/ssl/logentries.all.crt"
+default[:logentries][:ssl_cert_location] = "/opt/ssl/"
 
 
-# URL to download certificate from.
-default[:logentries][:cert_url] = ""
+default[:logentries][:syslog_selector] = "*.*"
