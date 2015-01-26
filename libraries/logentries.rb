@@ -58,7 +58,7 @@ module Knowsis
                 if log.nil? || log.empty?
                     Chef::Log.info("Log with name: #{logname} does not exist. Creating new log under host: #{ host_key}")
                     log = create_log(logname, host_key)
-                    lof = log["log"]
+                    log = log["log"]
                 end
 
                 token = log["token"]
@@ -75,7 +75,7 @@ module Knowsis
                     "user_key" => node[:logentries][:user_key],
                     "host_key" => host_key,
                     "name" => logname,
-                    "retrntion" => -1,
+                    "retention" => -1,
                     "source" => "token"
                 }
                 
@@ -89,7 +89,8 @@ module Knowsis
                 req.set_form_data(params)
                 res = https.request(req)
 
-                log_obj = JSON.parse(res.body)
+                log_obj = JSON.parse(res.body)                
+
                 log_obj
             end
 
