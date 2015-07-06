@@ -21,7 +21,7 @@ $ActionQueueTimeoutEnqueue 10
 $ActionQueueDiscardSeverity 0
 
 
-$template Logentries,"<%= get_log_key(node[:logentries][:log_name], node[:logentries][:host_name]) %> %HOSTNAME% %syslogtag%%msg%\n"
+$template Logentries,"<%= get_log_key(node[:logentries][:log_name], node[:logentries][:host_name]) %> %syslogtag%%msg%\n"
 <%= node[:logentries][:syslog_selector] %> @@api.logentries.com:<%= node[:logentries][:port_number] %>;Logentries
 
 

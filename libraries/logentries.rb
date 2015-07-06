@@ -9,7 +9,7 @@ module Knowsis
            
             def get_hosts()
                 Chef::Log.info("Fetching logs for hosts")
-                uri = "https://pull.logentries.com/#{ node[:logentries][:user_key] }/hosts/"
+                uri = "https://api.logentries.com/#{ node[:logentries][:user_key] }/hosts/"
                 response = JSON.parse(open(uri).read)
                 hosts = response["list"].select {|item| item["object"] == "host"}
                 hosts
@@ -40,7 +40,7 @@ module Knowsis
             def get_logs(host_key)
 
                 Chef::Log.info("Fetching logs for host: #{host_key}")
-                uri = "https://pull.logentries.com/#{ node[:logentries][:user_key] }/hosts/#{host_key}/"
+                uri = "https://api.logentries.com/#{ node[:logentries][:user_key] }/hosts/#{host_key}/"
                 
                 response = JSON.parse(open(uri).read)
                 hosts = response["list"].select {|item| item["object"] == "log"}
