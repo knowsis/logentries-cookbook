@@ -20,3 +20,5 @@ default[:logentries][:ssl_cert_location] = "/opt/ssl"
 
 
 default[:logentries][:syslog_selector] = "*.*"
+
+default[:logentries][:msg_filters] = []

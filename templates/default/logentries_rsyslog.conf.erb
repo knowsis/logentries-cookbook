@@ -22,8 +22,12 @@ $ActionQueueDiscardSeverity 0
 
 
 $template Logentries,"<%= get_log_key(node[:logentries][:log_name], node[:logentries][:host_name]) %> %syslogtag%%msg%\n"
+
+
+<% node[:logentries][:msg_filters].each do |value| %>
+	<% unless value.empty? -%>
+        <%= value %>
+    <% end %>
+<% end %>
+
 <%= node[:logentries][:syslog_selector] %> @@api.logentries.com:<%= node[:logentries][:port_number] %>;Logentries
-
-
-
-
