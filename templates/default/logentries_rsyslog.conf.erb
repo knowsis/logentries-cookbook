@@ -26,7 +26,7 @@ $template Logentries,"<%= get_log_key(node[:logentries][:log_name], node[:logent
 
 <% node[:logentries][:msg_filters].each do |value| %>
 	<% unless value.empty? -%>
-        <%= value %>
+        <%= "#{value}" %>
     <% end %>
 <% end %>
 
